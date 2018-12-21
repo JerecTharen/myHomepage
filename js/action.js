@@ -1,44 +1,38 @@
+"use strict";
 class BackgroundService {
-    private backgrounds: Array<string> = [];
-    private theDate: Date;
-    private theHour: number;
-    private theDay: number;
-    // private theMinute: number;
-    private timeInterval: number;
-    private currentInterval: number;
-    private currentBackground: string;
-    constructor(){
+    constructor() {
+        this.backgrounds = [];
         this.theDate = new Date();
         this.theHour = this.theDate.getHours();
         this.theDay = this.theDate.getDay() + 1;
         // this.theMinute = this.theDate.getMinutes();
         this.timeInterval = 168 / this.backgrounds.length;
-        this.currentInterval = Math.floor(((this.theDay-1)*24 + this.theHour +1)/this.timeInterval);
+        this.currentInterval = Math.floor(((this.theDay - 1) * 24 + this.theHour + 1) / this.timeInterval);
         this.currentBackground = this.backgrounds[this.currentInterval];
     }
-    addBackground(url: string): void{
+    addBackground(url) {
         this.backgrounds.push(url);
         this.reInit();
     }
-    getBackground(): string{
+    getBackground() {
         return this.currentBackground;
     }
-    refreshBackground(): BackgroundService{
+    refreshBackground() {
         return new BackgroundService();
     }
-    reInit(): void{
+    reInit() {
         this.theDate = new Date();
         this.theHour = this.theDate.getHours();
         this.theDay = this.theDate.getDay() + 1;
         this.timeInterval = 168 / this.backgrounds.length;
-        this.currentInterval = Math.floor(((this.theDay-1)*24 + this.theHour +1)/this.timeInterval);
+        this.currentInterval = Math.floor(((this.theDay - 1) * 24 + this.theHour + 1) / this.timeInterval);
         this.currentBackground = this.backgrounds[this.currentInterval];
     }
-    printInfo(): infoTemplate{
-        let month: string = "";
-        let weekday: string = "";
-        let result: infoTemplate = {date: "", picNum: 0};
-        switch(this.theDate.getMonth()){
+    printInfo() {
+        let month = "";
+        let weekday = "";
+        let result = { date: "", picNum: 0 };
+        switch (this.theDate.getMonth()) {
             case 0:
                 month = "January";
                 break;
@@ -76,7 +70,7 @@ class BackgroundService {
                 month = "December";
                 break;
         }
-        switch(this.theDay){
+        switch (this.theDay) {
             case 1:
                 weekday = "Sunday";
                 break;
@@ -99,13 +93,29 @@ class BackgroundService {
                 weekday = "Saturday";
                 break;
         }
-        result.date = `${weekday} ${month} ${this.theDate.getDate()}. The hour is ${this.theHour+1}`;
+        result.date = `${weekday} ${month} ${this.theDate.getDate()}. The hour is ${this.theHour + 1}`;
         result.picNum = this.currentInterval;
         return result;
     }
 }
-
-interface infoTemplate{
-    date: string;
-    picNum: number;
+let allBackgrounds = [];
+for (let i = 1; i < 61; i++) {
+    allBackgrounds.push(`./images-fonts/background${i}.jpg`);
 }
+// import { BackgroundService} from './BackgroundService';
+// import {allBackgroundsX} from "./backgroundsArray";
+let theBackground = new BackgroundService();
+function drawPage() {
+    theBackground = theBackground.refreshBackground();
+    for (let y = 0; y < allBackgrounds.length; y++) {
+        // @ts-ignore
+        theBackground.addBackground(allBackgrounds[y]);
+        document.getElementsByTagName('body')[0].style.backgroundImage = `url('${theBackground.getBackground()}')`;
+    }
+    let dateInfo = theBackground.printInfo();
+    // @ts-ignore
+    document.getElementById('date').innerHTML = `Date: ${dateInfo.date}`;
+    // @ts-ignore
+    document.getElementById('picNum').innerHTML = `This background is number: ${dateInfo.picNum}`;
+}
+drawPage();
