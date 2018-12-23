@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
 
+    <!-- google fonts -->
+
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <!-- my css -->
     <link rel="stylesheet" href="./css/main.css" type="text/css">
 
     <script src="./js/action.js" type="text/javascript" defer></script>
@@ -17,10 +22,25 @@
 
 
     <div id="containsAll">
-        <h1 id="date">Data: </h1>
-        <h3 id="picNum">This background is number: </h3>
-        <button onclick="drawPage()">REFRESH BACKGROUND</button>
+        <div id="mainInfo">
+            <h1 id="date">Data: </h1>
+            <h3 id="picNum">This background is number: </h3>
+            <button onclick="drawPage()">REFRESH BACKGROUND</button>
+        </div>
+        <div id="bTabSpace">
+            <ul id="bTabList">
+                <h3>Browser Tabs:</h3>
+                <li>No browser tabs saved</li>
+            </ul>
+            <button>NEW</button>
+        </div>
         <button onclick="hide()">SHOW/HIDE</button>
+    </div>
+
+    <div id="modalSpace">
+        <h1 id="modalTitle">This is a modal</h1>
+        <input id="modalInput">
+        <button id="modalBtn">SUBMIT</button>
     </div>
 
 

@@ -26,3 +26,8 @@ body{
   position: absolute;
   opacity: 0.7;
 }
+
+#modalSpace{
+  @extend #containsAll;
+  display: none;
+}

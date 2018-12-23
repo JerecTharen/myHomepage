@@ -1,4 +1,52 @@
 "use strict";
+class BTabService {
+    constructor() {
+        this.urlList = [];
+        this.nextID = 0;
+    }
+    getUrls() {
+        // let result: string[] = [];
+        // for (let i: number = 0; i < this.urlList.length; i++){
+        //     result.push(this.urlList[i].url);
+        // }
+        // return result;
+        return this.urlList;
+    }
+    addUrl(name, url) {
+        let newUrl = {
+            name: name,
+            url: url,
+            id: this.nextID
+        };
+        this.nextID++;
+        this.urlList.push(newUrl);
+    }
+    removeUrl(id) {
+        let result;
+        for (let i = 0; i < this.urlList.length; i++) {
+            if (this.urlList[i].id === id) {
+                result = this.urlList[i];
+                this.urlList.splice(i, 1);
+                return result;
+            }
+        }
+        return undefined;
+    }
+    setNextID(nextID) {
+        this.nextID = nextID;
+    }
+    editURL(id, name, url) {
+        let result = false;
+        for (let i = 0; i < this.urlList.length; i++) {
+            if (this.urlList[i].id === id) {
+                this.urlList[i].name = name;
+                this.urlList[i].url = url;
+                result = true;
+            }
+        }
+        return result;
+    }
+}
 class BackgroundService {
     constructor() {
         this.backgrounds = [];
@@ -105,6 +153,8 @@ for (let i = 1; i < 61; i++) {
 // import { BackgroundService} from './BackgroundService';
 // import {allBackgroundsX} from "./backgroundsArray";
 let theBackground = new BackgroundService();
+// @ts-ignore
+let allURL = new BTabService();
 function drawPage() {
     theBackground = theBackground.refreshBackground();
     for (let y = 0; y < allBackgrounds.length; y++) {
@@ -112,11 +162,18 @@ function drawPage() {
         theBackground.addBackground(allBackgrounds[y]);
         document.getElementsByTagName('body')[0].style.backgroundImage = `url('${theBackground.getBackground()}')`;
     }
+    let urlList = allURL.getUrls();
     let dateInfo = theBackground.printInfo();
     // @ts-ignore
     document.getElementById('date').innerHTML = `Date: ${dateInfo.date}`;
     // @ts-ignore
     document.getElementById('picNum').innerHTML = `This background is number: ${dateInfo.picNum}`;
+    // @ts-ignore
+    document.getElementById('bTabList').innerHTML = '';
+    for (let i = 0; i < urlList.length; i++) {
+        // @ts-ignore
+        document.getElementById('bTabList').innerHTML += `<li id="url${urlList[i].id}"><i onclick="allURL.removeUrl(${urlList[i].id})" class="fas fa-trash-alt"></i><a href="${urlList[i].url}">${urlList[i].name}</a></li>`;
+    }
 }
 drawPage();
 function hide() {
