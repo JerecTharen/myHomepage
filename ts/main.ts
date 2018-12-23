@@ -5,9 +5,14 @@
 let theBackground = new BackgroundService();
 // @ts-ignore
 let allURL = new BTabService();
+let newURL: URLInterface = {
+    name: '',
+    id: -1,
+    url: ''
+};
 
 function drawPage(): void{
-
+    //background draw
     theBackground = theBackground.refreshBackground();
     for(let y: number = 0; y < allBackgrounds.length; y++){
         // @ts-ignore
@@ -20,11 +25,20 @@ function drawPage(): void{
     document.getElementById('date').innerHTML = `Date: ${dateInfo.date}`;
     // @ts-ignore
     document.getElementById('picNum').innerHTML = `This background is number: ${dateInfo.picNum}`;
-    // @ts-ignore
-    document.getElementById('bTabList').innerHTML = '';
-    for(let i: number = 0; i < urlList.length; i++){
+
+
+    // URL List Draw
+    if(allURL.getUrls().length !== 0){
         // @ts-ignore
-        document.getElementById('bTabList').innerHTML += `<li id="url${urlList[i].id}"><i onclick="allURL.removeUrl(${urlList[i].id})" class="fas fa-trash-alt"></i><a href="${urlList[i].url}">${urlList[i].name}</a></li>`;
+        document.getElementById('bTabList').innerHTML = '';
+        for(let i: number = 0; i < urlList.length; i++){
+            // @ts-ignore
+            document.getElementById('bTabList').innerHTML += `<li id="url${urlList[i].id}"><i onclick="removeURL(${urlList[i].id})" class="fas fa-trash-alt"></i><a target="_blank" href="${urlList[i].url}">${urlList[i].name}</a></li>`;
+        }
+    }
+    else{
+        // @ts-ignore
+        document.getElementById('bTabList').innerHTML = '<li>No browser tabs saved</li>';
     }
 }
 

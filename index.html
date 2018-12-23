@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
 
     <!-- google fonts -->
-
+    <link href="https://fonts.googleapis.com/css?family=Thasadith" rel="stylesheet">
     <!-- font awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <!-- my css -->
@@ -17,7 +17,7 @@
 <body>
 
     <div id="hiddenControl">
-        <button onclick="show()">SHOW/HIDE</button>
+        <button onclick="showMain()">SHOW/HIDE</button>
     </div>
 
 
@@ -28,17 +28,19 @@
             <button onclick="drawPage()">REFRESH BACKGROUND</button>
         </div>
         <div id="bTabSpace">
+            <h3>Browser Tabs:</h3>
             <ul id="bTabList">
-                <h3>Browser Tabs:</h3>
                 <li>No browser tabs saved</li>
             </ul>
-            <button>NEW</button>
+            <button onclick="initialAddUrl()">NEW</button>
         </div>
-        <button onclick="hide()">SHOW/HIDE</button>
+        <button onclick="hideMain()">SHOW/HIDE</button>
     </div>
 
     <div id="modalSpace">
+        <i onclick="hideModal()" class="fas fa-window-close"></i>
         <h1 id="modalTitle">This is a modal</h1>
+        <label id="modalLabel" for="modalInput">Input: </label>
         <input id="modalInput">
         <button id="modalBtn">SUBMIT</button>
     </div>

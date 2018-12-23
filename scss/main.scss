@@ -1,3 +1,6 @@
+$thasadith: 'Thasadith', sans-serif;
+$myAccent: #7a808c;
+
 body, html{
   width: 100%;
   height: 100%;
@@ -11,6 +14,7 @@ body{
   //background properties
   background-size: cover;
   background-repeat: no-repeat;
+  font-family: $thasadith;
 }
 
 #containsAll{
@@ -18,6 +22,14 @@ body{
   padding: 1em;
   border-radius: 2em;
   border: ridge black .1em;
+}
+#bTabList{
+  a{
+    color: black;
+  }
+  a:hover{
+    color: $myAccent;
+  }
 }
 
 #hiddenControl{

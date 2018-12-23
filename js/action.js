@@ -146,6 +146,42 @@ class BackgroundService {
         return result;
     }
 }
+function initialAddUrl() {
+    // @ts-ignore
+    document.getElementById('modalTitle').innerHTML = "Add Browser Tab";
+    // @ts-ignore
+    document.getElementById('modalLabel').innerHTML = "Name of Website";
+    // @ts-ignore
+    document.getElementById('modalBtn').setAttribute('onclick', 'addName()');
+    showModal();
+}
+function addName() {
+    // @ts-ignore
+    let name = document.getElementById('modalInput').value;
+    if (name === '') {
+        alert('You must enter a name');
+    }
+    newURL.name = name;
+    // @ts-ignore
+    document.getElementById('modalInput').value = '';
+    // @ts-ignore
+    document.getElementById('modalBtn').setAttribute('onclick', 'addUrl()');
+    // @ts-ignore
+    document.getElementById('modalLabel').innerHTML = "URL of Website";
+}
+function addUrl() {
+    // @ts-ignore
+    let url = document.getElementById('modalInput').value;
+    if (url === '') {
+        alert('You must enter a URL');
+    }
+    newURL.url = url;
+    // @ts-ignore
+    document.getElementById('modalInput').value = '';
+    allURL.addUrl(newURL.name, newURL.url);
+    hideModal();
+    drawPage();
+}
 let allBackgrounds = [];
 for (let i = 1; i < 61; i++) {
     allBackgrounds.push(`./images-fonts/background${i}.jpg`);
@@ -155,7 +191,13 @@ for (let i = 1; i < 61; i++) {
 let theBackground = new BackgroundService();
 // @ts-ignore
 let allURL = new BTabService();
+let newURL = {
+    name: '',
+    id: -1,
+    url: ''
+};
 function drawPage() {
+    //background draw
     theBackground = theBackground.refreshBackground();
     for (let y = 0; y < allBackgrounds.length; y++) {
         // @ts-ignore
@@ -168,23 +210,47 @@ function drawPage() {
     document.getElementById('date').innerHTML = `Date: ${dateInfo.date}`;
     // @ts-ignore
     document.getElementById('picNum').innerHTML = `This background is number: ${dateInfo.picNum}`;
-    // @ts-ignore
-    document.getElementById('bTabList').innerHTML = '';
-    for (let i = 0; i < urlList.length; i++) {
+    // URL List Draw
+    if (allURL.getUrls().length !== 0) {
         // @ts-ignore
-        document.getElementById('bTabList').innerHTML += `<li id="url${urlList[i].id}"><i onclick="allURL.removeUrl(${urlList[i].id})" class="fas fa-trash-alt"></i><a href="${urlList[i].url}">${urlList[i].name}</a></li>`;
+        document.getElementById('bTabList').innerHTML = '';
+        for (let i = 0; i < urlList.length; i++) {
+            // @ts-ignore
+            document.getElementById('bTabList').innerHTML += `<li id="url${urlList[i].id}"><i onclick="removeURL(${urlList[i].id})" class="fas fa-trash-alt"></i><a target="_blank" href="${urlList[i].url}">${urlList[i].name}</a></li>`;
+        }
+    }
+    else {
+        // @ts-ignore
+        document.getElementById('bTabList').innerHTML = '<li>No browser tabs saved</li>';
     }
 }
 drawPage();
-function hide() {
+function removeURL(id) {
+    allURL.removeUrl(id);
+    drawPage();
+}
+function hideMain() {
     // @ts-ignore
     document.getElementById('containsAll').style.display = 'none';
     // @ts-ignore
     document.getElementById('hiddenControl').style.display = "block";
 }
-function show() {
+function showMain() {
     // @ts-ignore
     document.getElementById('containsAll').style.display = 'block';
     // @ts-ignore
     document.getElementById('hiddenControl').style.display = 'none';
+}
+function showModal() {
+    // @ts-ignore
+    document.getElementById('containsAll').style.display = 'none';
+    // @ts-ignore
+    document.getElementById('modalSpace').style.display = 'block';
+}
+function hideModal() {
+    // @ts-ignore
+    document.getElementById('modalSpace').style.display = 'none';
+    // @ts-ignore
+    document.getElementById('containsAll').style.display = 'block';
+    drawPage();
 }
