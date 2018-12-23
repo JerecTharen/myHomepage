@@ -119,3 +119,15 @@ function drawPage() {
     document.getElementById('picNum').innerHTML = `This background is number: ${dateInfo.picNum}`;
 }
 drawPage();
+function hide() {
+    // @ts-ignore
+    document.getElementById('containsAll').style.display = 'none';
+    // @ts-ignore
+    document.getElementById('hiddenControl').style.display = "block";
+}
+function show() {
+    // @ts-ignore
+    document.getElementById('containsAll').style.display = 'block';
+    // @ts-ignore
+    document.getElementById('hiddenControl').style.display = 'none';
+}
