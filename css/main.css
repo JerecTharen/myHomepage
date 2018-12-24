@@ -24,6 +24,9 @@ body {
 #bTabList a:hover {
   color: #7a808c; }
 
+.tabListElement {
+  margin: 0 .25em; }
+
 #hiddenControl {
   display: none;
   top: 1em;

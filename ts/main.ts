@@ -33,7 +33,7 @@ function drawPage(): void{
         document.getElementById('bTabList').innerHTML = '';
         for(let i: number = 0; i < urlList.length; i++){
             // @ts-ignore
-            document.getElementById('bTabList').innerHTML += `<li id="url${urlList[i].id}"><i onclick="removeURL(${urlList[i].id})" class="fas fa-trash-alt"></i><a target="_blank" href="${urlList[i].url}">${urlList[i].name}</a></li>`;
+            document.getElementById('bTabList').innerHTML += `<li id="url${urlList[i].id}"><span class="tabListElement"><i onclick="removeURL(${urlList[i].id})" class="fas fa-trash-alt"></i></span><span class="tabListElement"><i onclick="initialEditUrl(${urlList[i].id})" class="fas fa-edit"></i></span><span class="tabListElement"><a target="_blank" href="${urlList[i].url}">${urlList[i].name}</a></span></li>`;
         }
     }
     else{

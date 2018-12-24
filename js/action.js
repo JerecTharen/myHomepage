@@ -186,6 +186,43 @@ let allBackgrounds = [];
 for (let i = 1; i < 61; i++) {
     allBackgrounds.push(`./images-fonts/background${i}.jpg`);
 }
+function initialEditUrl(id) {
+    // @ts-ignore
+    document.getElementById('modalTitle').innerHTML = "Edit Browser Tab";
+    // @ts-ignore
+    document.getElementById('modalLabel').innerHTML = "Name of Website";
+    // @ts-ignore
+    document.getElementById('modalBtn').setAttribute('onclick', 'editName()');
+    newURL.id = id;
+    showModal();
+}
+function editName() {
+    // @ts-ignore
+    let name = document.getElementById('modalInput').value;
+    if (name === '') {
+        alert('You must enter a name');
+    }
+    newURL.name = name;
+    // @ts-ignore
+    document.getElementById('modalInput').value = '';
+    // @ts-ignore
+    document.getElementById('modalBtn').setAttribute('onclick', 'finishEdit()');
+    // @ts-ignore
+    document.getElementById('modalLabel').innerHTML = "URL of Website";
+}
+function finishEdit() {
+    // @ts-ignore
+    let url = document.getElementById('modalInput').value;
+    if (url === '') {
+        alert('You must enter a URL');
+    }
+    newURL.url = url;
+    // @ts-ignore
+    document.getElementById('modalInput').value = '';
+    allURL.editURL(newURL.id, newURL.name, newURL.url);
+    hideModal();
+    drawPage();
+}
 // import { BackgroundService} from './BackgroundService';
 // import {allBackgroundsX} from "./backgroundsArray";
 let theBackground = new BackgroundService();
@@ -216,7 +253,7 @@ function drawPage() {
         document.getElementById('bTabList').innerHTML = '';
         for (let i = 0; i < urlList.length; i++) {
             // @ts-ignore
-            document.getElementById('bTabList').innerHTML += `<li id="url${urlList[i].id}"><i onclick="removeURL(${urlList[i].id})" class="fas fa-trash-alt"></i><a target="_blank" href="${urlList[i].url}">${urlList[i].name}</a></li>`;
+            document.getElementById('bTabList').innerHTML += `<li id="url${urlList[i].id}"><span class="tabListElement"><i onclick="removeURL(${urlList[i].id})" class="fas fa-trash-alt"></i></span><span class="tabListElement"><i onclick="initialEditUrl(${urlList[i].id})" class="fas fa-edit"></i></span><span class="tabListElement"><a target="_blank" href="${urlList[i].url}">${urlList[i].name}</a></span></li>`;
         }
     }
     else {

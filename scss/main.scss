@@ -31,6 +31,9 @@ body{
     color: $myAccent;
   }
 }
+.tabListElement{
+  margin: 0 .25em;
+}
 
 #hiddenControl{
   display: none;
