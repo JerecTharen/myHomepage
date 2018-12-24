@@ -12,6 +12,10 @@ body {
   background-repeat: no-repeat;
   font-family: "Thasadith", sans-serif; }
 
+.danger {
+  color: #ff2323;
+  border-color: #ff2323; }
+
 #containsAll, #modalSpace {
   background-color: whitesmoke;
   padding: 1em;

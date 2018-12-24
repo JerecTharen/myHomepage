@@ -1,5 +1,6 @@
 $thasadith: 'Thasadith', sans-serif;
 $myAccent: #7a808c;
+$dangerRed: #ff2323;
 
 body, html{
   width: 100%;
@@ -15,6 +16,11 @@ body{
   background-size: cover;
   background-repeat: no-repeat;
   font-family: $thasadith;
+}
+
+.danger{
+  color: $dangerRed;
+  border-color: $dangerRed;
 }
 
 #containsAll{

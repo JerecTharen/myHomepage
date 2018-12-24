@@ -156,31 +156,57 @@ function initialAddUrl() {
     showModal();
 }
 function addName() {
+    let canContinue = false;
     // @ts-ignore
     let name = document.getElementById('modalInput').value;
     if (name === '') {
-        alert('You must enter a name');
+        // @ts-ignore
+        document.getElementById('modalTitle').innerHTML = "You must enter a name";
+        // @ts-ignore
+        document.getElementById('modalInput').setAttribute('class', 'danger');
+    }
+    else {
+        canContinue = true;
+        // @ts-ignore
+        document.getElementById('modalInput').setAttribute('class', '');
+        // @ts-ignore
+        document.getElementById('modalTitle').innerHTML = "Add Browser Tab";
     }
     newURL.name = name;
     // @ts-ignore
     document.getElementById('modalInput').value = '';
-    // @ts-ignore
-    document.getElementById('modalBtn').setAttribute('onclick', 'addUrl()');
-    // @ts-ignore
-    document.getElementById('modalLabel').innerHTML = "URL of Website";
+    if (canContinue) {
+        // @ts-ignore
+        document.getElementById('modalBtn').setAttribute('onclick', 'addUrl()');
+        // @ts-ignore
+        document.getElementById('modalLabel').innerHTML = "URL of Website";
+    }
 }
 function addUrl() {
+    let canContinue = false;
     // @ts-ignore
     let url = document.getElementById('modalInput').value;
     if (url === '') {
-        alert('You must enter a URL');
+        // @ts-ignore
+        document.getElementById('modalTitle').innerHTML = "You must enter a URL";
+        // @ts-ignore
+        document.getElementById('modalInput').setAttribute('class', 'danger');
+    }
+    else {
+        canContinue = true;
+        // @ts-ignore
+        document.getElementById('modalInput').setAttribute('class', '');
+        // @ts-ignore
+        document.getElementById('modalTitle').innerHTML = "Add Browser Tab";
     }
     newURL.url = url;
-    // @ts-ignore
-    document.getElementById('modalInput').value = '';
-    allURL.addUrl(newURL.name, newURL.url);
-    hideModal();
-    drawPage();
+    if (canContinue) {
+        // @ts-ignore
+        document.getElementById('modalInput').value = '';
+        allURL.addUrl(newURL.name, newURL.url);
+        hideModal();
+        drawPage();
+    }
 }
 let allBackgrounds = [];
 for (let i = 1; i < 61; i++) {
@@ -197,31 +223,57 @@ function initialEditUrl(id) {
     showModal();
 }
 function editName() {
+    let canContinue = false;
     // @ts-ignore
     let name = document.getElementById('modalInput').value;
     if (name === '') {
-        alert('You must enter a name');
+        // @ts-ignore
+        document.getElementById('modalTitle').innerHTML = "You must enter a name";
+        // @ts-ignore
+        document.getElementById('modalInput').setAttribute('class', 'danger');
+    }
+    else {
+        canContinue = true;
+        // @ts-ignore
+        document.getElementById('modalTitle').innerHTML = "Edit Browser Tab";
+        // @ts-ignore
+        document.getElementById('modalInput').setAttribute('class', '');
     }
     newURL.name = name;
-    // @ts-ignore
-    document.getElementById('modalInput').value = '';
-    // @ts-ignore
-    document.getElementById('modalBtn').setAttribute('onclick', 'finishEdit()');
-    // @ts-ignore
-    document.getElementById('modalLabel').innerHTML = "URL of Website";
+    if (canContinue) {
+        // @ts-ignore
+        document.getElementById('modalInput').value = '';
+        // @ts-ignore
+        document.getElementById('modalBtn').setAttribute('onclick', 'finishEdit()');
+        // @ts-ignore
+        document.getElementById('modalLabel').innerHTML = "URL of Website";
+    }
 }
 function finishEdit() {
+    let canContinue = false;
     // @ts-ignore
     let url = document.getElementById('modalInput').value;
     if (url === '') {
-        alert('You must enter a URL');
+        // @ts-ignore
+        document.getElementById('modalTitle').innerHTML = "You must enter a URL";
+        // @ts-ignore
+        document.getElementById('modalInput').setAttribute('class', 'danger');
+    }
+    else {
+        canContinue = true;
+        // @ts-ignore
+        document.getElementById('modalTitle').innerHTML = "Edit Browser Tab";
+        // @ts-ignore
+        document.getElementById('modalInput').setAttribute('class', '');
     }
     newURL.url = url;
-    // @ts-ignore
-    document.getElementById('modalInput').value = '';
-    allURL.editURL(newURL.id, newURL.name, newURL.url);
-    hideModal();
-    drawPage();
+    if (canContinue) {
+        // @ts-ignore
+        document.getElementById('modalInput').value = '';
+        allURL.editURL(newURL.id, newURL.name, newURL.url);
+        hideModal();
+        drawPage();
+    }
 }
 // import { BackgroundService} from './BackgroundService';
 // import {allBackgroundsX} from "./backgroundsArray";
