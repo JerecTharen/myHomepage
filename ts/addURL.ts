@@ -57,6 +57,7 @@ function addUrl(): void{
         // @ts-ignore
         document.getElementById('modalInput').value = '';
         allURL.addUrl(newURL.name, newURL.url);
+        setURLStorage();
         hideModal();
         drawPage();
     }

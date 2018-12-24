@@ -32,8 +32,12 @@ class BTabService {
         }
         return undefined;
     }
-    setNextID(nextID) {
+    getNextID() {
+        return this.nextID;
+    }
+    setAll(nextID, data) {
         this.nextID = nextID;
+        this.urlList = data;
     }
     editURL(id, name, url) {
         let result = false;
@@ -146,6 +150,18 @@ class BackgroundService {
         return result;
     }
 }
+function setURLStorage() {
+    let data = {
+        nextID: allURL.getNextID(),
+        data: allURL.getUrls()
+    };
+    // window.localStorage.setItem('urls', JSON.stringify(data));
+    window.localStorage.urls = JSON.stringify(data);
+}
+function retrieveURLStorage() {
+    let data = JSON.parse(window.localStorage.urls);
+    allURL.setAll(data.nextID, data.data);
+}
 function initialAddUrl() {
     // @ts-ignore
     document.getElementById('modalTitle').innerHTML = "Add Browser Tab";
@@ -204,6 +220,7 @@ function addUrl() {
         // @ts-ignore
         document.getElementById('modalInput').value = '';
         allURL.addUrl(newURL.name, newURL.url);
+        setURLStorage();
         hideModal();
         drawPage();
     }
@@ -271,6 +288,7 @@ function finishEdit() {
         // @ts-ignore
         document.getElementById('modalInput').value = '';
         allURL.editURL(newURL.id, newURL.name, newURL.url);
+        setURLStorage();
         hideModal();
         drawPage();
     }
@@ -286,6 +304,10 @@ let newURL = {
     url: ''
 };
 function drawPage() {
+    //get urls out of storage
+    if (window.localStorage.urls !== undefined) {
+        retrieveURLStorage();
+    }
     //background draw
     theBackground = theBackground.refreshBackground();
     for (let y = 0; y < allBackgrounds.length; y++) {
@@ -305,7 +327,7 @@ function drawPage() {
         document.getElementById('bTabList').innerHTML = '';
         for (let i = 0; i < urlList.length; i++) {
             // @ts-ignore
-            document.getElementById('bTabList').innerHTML += `<li id="url${urlList[i].id}"><span class="tabListElement"><i onclick="removeURL(${urlList[i].id})" class="fas fa-trash-alt"></i></span><span class="tabListElement"><i onclick="initialEditUrl(${urlList[i].id})" class="fas fa-edit"></i></span><span class="tabListElement"><a target="_blank" href="${urlList[i].url}">${urlList[i].name}</a></span></li>`;
+            document.getElementById('bTabList').innerHTML += `<li id="url${urlList[i].id}"><span class="tabListElement"><i onclick="removeURL(${urlList[i].id})" class="bIcon fas fa-trash-alt"></i></span><span class="tabListElement"><i onclick="initialEditUrl(${urlList[i].id})" class="fas fa-edit bIcon"></i></span><span class="tabListElement"><a target="_blank" href="${urlList[i].url}">${urlList[i].name}</a></span></li>`;
         }
     }
     else {
@@ -314,8 +336,10 @@ function drawPage() {
     }
 }
 drawPage();
+var set = Reflect.set;
 function removeURL(id) {
     allURL.removeUrl(id);
+    setURLStorage();
     drawPage();
 }
 function hideMain() {

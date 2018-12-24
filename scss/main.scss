@@ -30,15 +30,20 @@ body{
   border: ridge black .1em;
 }
 #bTabList{
+  font-weight: bold;
   a{
     color: black;
+    text-decoration: none;
   }
   a:hover{
-    color: $myAccent;
+    @extend .bIcon;
   }
 }
 .tabListElement{
   margin: 0 .25em;
+}
+.bIcon:hover{
+  color: $myAccent;
 }
 
 #hiddenControl{

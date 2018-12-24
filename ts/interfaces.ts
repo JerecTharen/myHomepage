@@ -4,3 +4,8 @@ interface URLInterface{
     name: string;
     id: number;
 }
+
+interface LSData{
+    nextID: number;
+    data: URLInterface[];
+}

@@ -12,6 +12,10 @@ let newURL: URLInterface = {
 };
 
 function drawPage(): void{
+    //get urls out of storage
+    if(window.localStorage.urls !== undefined){
+        retrieveURLStorage();
+    }
     //background draw
     theBackground = theBackground.refreshBackground();
     for(let y: number = 0; y < allBackgrounds.length; y++){
@@ -33,7 +37,7 @@ function drawPage(): void{
         document.getElementById('bTabList').innerHTML = '';
         for(let i: number = 0; i < urlList.length; i++){
             // @ts-ignore
-            document.getElementById('bTabList').innerHTML += `<li id="url${urlList[i].id}"><span class="tabListElement"><i onclick="removeURL(${urlList[i].id})" class="fas fa-trash-alt"></i></span><span class="tabListElement"><i onclick="initialEditUrl(${urlList[i].id})" class="fas fa-edit"></i></span><span class="tabListElement"><a target="_blank" href="${urlList[i].url}">${urlList[i].name}</a></span></li>`;
+            document.getElementById('bTabList').innerHTML += `<li id="url${urlList[i].id}"><span class="tabListElement"><i onclick="removeURL(${urlList[i].id})" class="bIcon fas fa-trash-alt"></i></span><span class="tabListElement"><i onclick="initialEditUrl(${urlList[i].id})" class="fas fa-edit bIcon"></i></span><span class="tabListElement"><a target="_blank" href="${urlList[i].url}">${urlList[i].name}</a></span></li>`;
         }
     }
     else{

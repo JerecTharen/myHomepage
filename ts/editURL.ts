@@ -58,6 +58,7 @@ function finishEdit(): void{
         // @ts-ignore
         document.getElementById('modalInput').value = '';
         allURL.editURL(newURL.id, newURL.name, newURL.url);
+        setURLStorage();
         hideModal();
         drawPage();
     }

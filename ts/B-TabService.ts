@@ -36,8 +36,12 @@ class BTabService{
         }
         return undefined;
     }
-    setNextID(nextID: number): void{
+    getNextID(): number{
+        return this.nextID;
+    }
+    setAll(nextID: number, data: URLInterface[]): void{
         this.nextID = nextID;
+        this.urlList = data;
     }
     editURL(id: number, name: string, url: string): boolean{
         let result: boolean = false;

@@ -22,14 +22,17 @@ body {
   border-radius: 2em;
   border: ridge black .1em; }
 
-#bTabList a {
-  color: black; }
-
-#bTabList a:hover {
-  color: #7a808c; }
+#bTabList {
+  font-weight: bold; }
+  #bTabList a {
+    color: black;
+    text-decoration: none; }
 
 .tabListElement {
   margin: 0 .25em; }
+
+.bIcon:hover, #bTabList a:hover {
+  color: #7a808c; }
 
 #hiddenControl {
   display: none;
