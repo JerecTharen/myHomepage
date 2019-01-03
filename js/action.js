@@ -150,6 +150,11 @@ class BackgroundService {
         return result;
     }
 }
+let allBackgrounds = [];
+for (let i = 1; i < 61; i++) {
+    allBackgrounds.push(`./images-fonts/background${i}.jpg`);
+}
+///<reference path="backgroundsArray.ts"/>
 function setURLStorage() {
     let data = {
         nextID: allURL.getNextID(),
@@ -161,6 +166,19 @@ function setURLStorage() {
 function retrieveURLStorage() {
     let data = JSON.parse(window.localStorage.urls);
     allURL.setAll(data.nextID, data.data);
+}
+if (!window.localStorage.backgrounds) {
+    let theData = [];
+    for (let i = 0; i < allBackgrounds.length; i++) {
+        theData.push(allBackgrounds[i]);
+    }
+    window.localStorage.backgrounds = JSON.stringify(theData);
+}
+function setBackgroundsStorage(data) {
+    window.localStorage.backgrounds = JSON.stringify(data);
+}
+function retrieveBackgroundStorage() {
+    allBackgrounds = JSON.parse(window.localStorage.backgrounds);
 }
 function initialAddUrl() {
     // @ts-ignore
@@ -224,10 +242,6 @@ function addUrl() {
         hideModal();
         drawPage();
     }
-}
-let allBackgrounds = [];
-for (let i = 1; i < 61; i++) {
-    allBackgrounds.push(`./images-fonts/background${i}.jpg`);
 }
 function initialEditUrl(id) {
     // @ts-ignore
@@ -307,6 +321,10 @@ function drawPage() {
     //get urls out of storage
     if (window.localStorage.urls !== undefined) {
         retrieveURLStorage();
+    }
+    //get backgrounds out of storage
+    if (window.localStorage.backgrounds) {
+        retrieveBackgroundStorage();
     }
     //background draw
     theBackground = theBackground.refreshBackground();

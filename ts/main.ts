@@ -16,6 +16,10 @@ function drawPage(): void{
     if(window.localStorage.urls !== undefined){
         retrieveURLStorage();
     }
+    //get backgrounds out of storage
+    if(window.localStorage.backgrounds){
+        retrieveBackgroundStorage();
+    }
     //background draw
     theBackground = theBackground.refreshBackground();
     for(let y: number = 0; y < allBackgrounds.length; y++){
