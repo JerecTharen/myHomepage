@@ -53,6 +53,10 @@ body{
   opacity: 0.7;
 }
 
+#backgroundSpace{
+  display: none;
+}
+
 #modalSpace{
   @extend #containsAll;
   display: none;

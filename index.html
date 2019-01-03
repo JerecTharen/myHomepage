@@ -26,6 +26,7 @@
             <h1 id="date">Data: </h1>
             <h3 id="picNum">This background is number: </h3>
             <button onclick="drawPage()">REFRESH BACKGROUND</button>
+            <button>ALL BACKGROUNDS</button>
         </div>
         <div id="bTabSpace">
             <h3>Browser Tabs:</h3>
@@ -35,6 +36,18 @@
             <button onclick="initialAddUrl()">NEW</button>
         </div>
         <button onclick="hideMain()">SHOW/HIDE</button>
+    </div>
+
+    <div id="backgroundSpace">
+        <h1>Backgrounds</h1>
+        <div id="newBackgroundSpace">
+            <label for="newBackgroundURL">New Background URL: </label>
+            <input type="text" id="newBackgroundURL">
+            <button>SUBMIT</button>
+        </div>
+        <div id="allBackgrounds">
+            <p>No Backgrounds Have been Set</p>
+        </div>
     </div>
 
     <div id="modalSpace">
